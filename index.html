@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Névnapok és Születésnapok</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Névnapok és Születésnapok cucc</h1>
+        <form id="nameForm">
+            <label for="nev">Keresztnév:</label>
+            <input type="text" id="nev" placeholder="Írj be egy keresztnevet">
+            <button type="button" id="keres">Keresés</button>
+            <button type="button" id="current">Aktuális névnap</button>
+            <br><br>
+
+            <label for="datum">Dátum:</label>
+            <input type="date" id="datum">
+            <div id="szuletesnap"></div>
+            <div id="resultBox"></div>
+        </form>
+    </div>
+
+    <script src="nevnapok.js"></script>
+</body>
+</html>
