@@ -143,15 +143,22 @@ honapok[12] = new Array("", "Elza", "Melinda és Vivien", "Ferenc és Olívia", 
         const dateInput = document.getElementById('datum');
         const resultBox = document.getElementById('resultBox');
         const birthdayDiv = document.getElementById('szuletesnap');
+        const birthdaySelect = document.getElementById('szuletesnapInput'); // Új select elem
     
         const currentDate = getCurrentDate();
         dateInput.value = currentDate;
-
-        displayResult(getNamesByDate(currentDate));
     
-
+        displayResult(getNamesByDate(currentDate));
         updateBirthdayMessage();
-
+    
+        // Feltölti a születésnap választót a birthdays tömbből
+        birthdays.forEach(person => {
+            const option = document.createElement('option');
+            option.value = person.date;
+            option.textContent = `${person.name} (${person.date})`;
+            birthdaySelect.appendChild(option);
+        });
+    
         function updateBirthdayMessage() {
             const selectedDate = dateInput.value;
             const birthdayMessage = getBirthdayInfo(selectedDate);
@@ -161,7 +168,7 @@ honapok[12] = new Array("", "Elza", "Melinda és Vivien", "Ferenc és Olívia", 
                 birthdayDiv.textContent = '';
             }
         }
-
+    
         searchButton.addEventListener('click', () => {
             const name = nameInput.value.trim();
             if (name) {
@@ -175,18 +182,31 @@ honapok[12] = new Array("", "Elza", "Melinda és Vivien", "Ferenc és Olívia", 
                 }
             }
         });
-
+    
         currentButton.addEventListener('click', () => {
             const currentDate = getCurrentDate();
             dateInput.value = currentDate;
             displayResult(getNamesByDate(currentDate));
             updateBirthdayMessage();
         });
-
+    
         dateInput.addEventListener('change', () => {
             const selectedDate = dateInput.value;
             displayResult(getNamesByDate(selectedDate));
             updateBirthdayMessage();
+        });
+    
+        birthdaySelect.addEventListener('change', () => {
+            const selectedDate = birthdaySelect.value;
+            if (selectedDate) {
+                dateInput.value = selectedDate;
+                displayResult(getNamesByDate(selectedDate));
+                updateBirthdayMessage();
+            } else {
+                dateInput.value = '';
+                displayResult(null);
+                birthdayDiv.textContent = '';
+            }
         });
     });
 
